@@ -1,0 +1,50 @@
+<div class="dialog-body-custom"  >
+    <div >
+      <div class="flex justify-content-end">
+        <button *ngIf="isDetail" (click)="edit()"  pButton type="button" label="Edit" ></button>
+      </div>
+    </div>
+      <div class="p-fluid grid" [formGroup]="AddForm">
+        <div  class="field col-12">
+          <label class="block">Color Name <span class="text-danger"> *</span></label>
+          <span class="w-full">
+            <input
+              type="text"
+              formControlName="colorName"
+              pInputText
+              placeholder=""
+            />
+          </span>
+
+          <div *ngIf="f['colorName'].invalid && (f['colorName'].dirty || f['colorName'].touched)">
+            <div *ngIf="f['colorName'].hasError('required')" style="color: rgb(225, 82, 82);">
+              This is a required field.
+            </div>
+          </div>
+
+        </div>
+        <div  class="field col-12">
+            <label class="block">Color Code<span class="text-danger"> *</span></label>
+            <span class="w-full">
+                <input
+                type="text"
+                formControlName="colorCode"
+                pInputText
+                placeholder=""
+              />
+            </span>
+            
+            <div *ngIf="f['colorCode'].invalid && (f['colorCode'].dirty || f['colorCode'].touched)">
+                <div *ngIf="f['colorCode'].hasError('required')" style="color: rgb(225, 82, 82);">
+                  This is a required field.
+                </div>
+              </div>
+          </div>
+      </div>
+</div>
+
+<div class="dialog-footer-custom flex align-items-center justify-content-center">
+    <button   pButton pRipple type="button" label="Cancel" class="p-button-secondary mr-2" (click)="onClose()"></button>
+    <button [disabled]="this.AddForm.invalid || isDetail" pButton pRipple type="button" label="Save" (click)="onSave()"></button>
+</div>
+

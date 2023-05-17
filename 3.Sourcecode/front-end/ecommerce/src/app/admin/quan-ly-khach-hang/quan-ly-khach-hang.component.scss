@@ -1,0 +1,19 @@
+::ng-deep .filter-wrap {
+  .p-fieldset-legend {
+      float: right;
+      border-radius: 50%;
+
+      .p-fieldset-toggler {
+          display: none;
+      }
+  }
+
+  .p-fieldset.p-fieldset-toggleable .p-fieldset-legend a {
+      padding: 0.5rem;
+      border-radius: 50%;
+  }
+
+  .p-fieldset .p-fieldset-content {
+      padding: 0.5rem 1.5rem;
+  }
+}

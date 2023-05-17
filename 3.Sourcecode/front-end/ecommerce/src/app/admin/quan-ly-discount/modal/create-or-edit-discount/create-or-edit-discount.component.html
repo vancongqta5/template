@@ -1,0 +1,48 @@
+<div class="dialog-body-custom"  >
+    <div >
+      <div class="flex justify-content-end">
+        <button *ngIf="isDetail" (click)="edit()"  pButton type="button" label="Edit" ></button>
+      </div>
+    </div>
+      <div class="p-fluid grid" [formGroup]="AddForm">
+        <div  class="field col-12">
+          <label class="block">Discount Name <span class="text-danger"> *</span></label>
+          <span class="w-full">
+            <input
+              type="text"
+              formControlName="discountName"
+              pInputText
+              placeholder=""
+            />
+          </span>
+
+          <div *ngIf="f['discountName'].invalid && (f['discountName'].dirty || f['discountName'].touched)">
+            <div *ngIf="f['discountName'].hasError('required')" style="color: rgb(225, 82, 82);">
+              This is a required field.
+            </div>
+          </div>
+
+        </div>
+        <div  class="field col-12">
+            <label class="block">Discount Percent<span class="text-danger"> *</span></label>
+            <span class="w-full">
+
+                <p-inputNumber formControlName="discountPercent" mode="decimal" [showButtons]="true" inputId="minmax-buttons" [min]="0" [max]="100">
+                </p-inputNumber>
+         
+             </span>
+            
+            <div *ngIf="f['discountPercent'].invalid && (f['discountPercent'].dirty || f['discountPercent'].touched)">
+                <div *ngIf="f['discountPercent'].hasError('required')" style="color: rgb(225, 82, 82);">
+                  This is a required field.
+                </div>
+              </div>
+          </div>
+      </div>
+</div>
+
+<div class="dialog-footer-custom flex align-items-center justify-content-center">
+    <button   pButton pRipple type="button" label="Cancel" class="p-button-secondary mr-2" (click)="onClose()"></button>
+    <button [disabled]="this.AddForm.invalid || isDetail" pButton pRipple type="button" label="Save" (click)="onSave()"></button>
+</div>
+

@@ -1,0 +1,63 @@
+.confirm-dialog {
+    width: 500px;
+  }
+  
+  .confirm-icon {
+    border: 0.25em solid #facea8;
+    border-radius: 50%;
+    width: 7rem;
+    height: 7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .confirm-icon-show {
+    animation: confirm-animate-error-icon 0.5s;
+  }
+  
+  .confirm-icon-content {
+    animation: confirm-animate-i-mark 0.5s;
+    color: #f8bb86;
+    font-size: 3.75em;
+  }
+  
+  @keyframes confirm-animate-i-mark {
+    0% {
+      transform: rotateZ(45deg);
+      opacity: 0;
+    }
+  
+    25% {
+      transform: rotateZ(-25deg);
+      opacity: 0.4;
+    }
+  
+    50% {
+      transform: rotateZ(15deg);
+      opacity: 0.8;
+    }
+  
+    75% {
+      transform: rotateZ(-5deg);
+      opacity: 1;
+    }
+  
+    100% {
+      transform: rotateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes confirm-animate-error-icon {
+    0% {
+      transform: rotateX(100deg);
+      opacity: 0;
+    }
+  
+    100% {
+      transform: rotateX(0deg);
+      opacity: 1;
+    }
+  }
+  

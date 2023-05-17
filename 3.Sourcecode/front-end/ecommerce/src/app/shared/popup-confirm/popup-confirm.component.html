@@ -1,0 +1,20 @@
+<div class="c-dialog confirm-dialog py-3">
+    <div class="flex justify-content-center">
+      <div class="confirm-icon confirm-icon-show">
+        <span class="confirm-icon-content">!</span>
+      </div>
+    </div>
+  
+    <div class="c-dialog-content">
+      <h3 class="text-center">
+        {{title}}
+      </h3>
+      <p>{{content}}</p>
+    </div>
+    <div class="dialog-footer-custom flex align-items-center justify-content-center">
+      <button pButton type="button" *ngIf="status != 0" label="No" class="p-button-danger mr-3" (click)="ref.close()"></button>
+      <button pButton type="button" *ngIf="status != 0" label="Yes" (click)="onSubmit()"></button>
+      <button pButton type="button" class="p-button-success" *ngIf="status == 0" label="OK" (click)="onSubmit()"></button>
+    </div>
+  </div>
+  

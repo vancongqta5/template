@@ -1,0 +1,119 @@
+<app-header></app-header>
+<div class="card mt-2 mb-2" style="margin-left: 10%; margin-right: 10%;" [formGroup]="formRegister" >
+  <div class="p-fluid grid">
+    <div class="field col-12">
+        <h1 class="flex justify-content-center">Register</h1>
+    </div>
+    <div class="field col-12">
+      <button [disabled]="true" *ngIf="showMessage" style="opacity: 0.9;"  pButton pRipple type="button"  class="p-button-danger" 
+       label="{{dangerMessage}}"></button>
+   </div>
+    <div class="col-6 md:col-6">
+      <div class="field">
+        <label class="block">Username
+          <span  class="text-danger"> *</span>
+        </label>
+        <input formControlName="username" type="text" pInputText />
+
+        <div *ngIf="f['username'].invalid && (f['username'].dirty || f['username'].touched)">
+          <div *ngIf="f['username'].hasError('required')" style="color: rgb(225, 82, 82);">
+            This is a required field.
+          </div>
+        </div>
+
+      </div>
+      <label class="block">Avatar
+        <span class="text-danger"> *</span>
+      </label>
+      <p-fileUpload  class="mt-1 mb-1" name="myfile[]" [customUpload]="true" [auto]="true" (uploadHandler)="chooseFile($event)" accept=".png, .jpg, .jpeg" type="file">
+        <ng-template pTemplate="content" let-files>
+            <div>
+              <p-image class="flex justify-content-center" *ngIf="!isLoading" src="{{avatarDefaut}}" alt="Image" [preview]="true" width="250px"></p-image>
+              <p-progressSpinner class="flex justify-content-center" *ngIf="isLoading"></p-progressSpinner>
+            </div>
+        </ng-template>
+        </p-fileUpload>
+    </div>
+
+    <div class="col-6 md:col-6">
+      <div class="field">
+        <label class="block">Password
+          <span class="text-danger"> *</span>
+        </label>
+        <input  formControlName="password" type="text" pInputText />
+         <div *ngIf="f['password'].invalid && (f['password'].dirty || f['password'].touched)">
+          <div *ngIf="f['password'].hasError('required')" style="color: rgb(225, 82, 82);">
+            This is a required field.
+          </div>
+          <div *ngIf="f['password'].hasError('minlength')" style="color: rgb(225, 82, 82);">
+            Password must be longer than 6 characters.
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <label class="block">Full name
+          <span class="text-danger"> *</span>
+        </label>
+        <input  formControlName="fullName" type="text" pInputText />
+        <div *ngIf="f['fullName'].invalid && (f['fullName'].dirty || f['fullName'].touched)">
+          <div *ngIf="f['fullName'].hasError('required')" style="color: rgb(225, 82, 82);">
+            This is a required field.
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <label class="block">Email
+          <span class="text-danger"> *</span>
+        </label>
+        <input  formControlName="email" type="text" pInputText />
+        
+        <div *ngIf="f['email'].invalid && (f['email'].dirty || f['email'].touched)">
+          <div *ngIf="f['email'].hasError('required')" style="color: rgb(225, 82, 82);">
+            This is a required field.
+          </div>
+          <div *ngIf="f['email'].hasError('email')" style="color: rgb(225, 82, 82);">
+            Format email incorect (Ex: abc@gmail.com)
+          </div>
+        </div>
+
+      </div>
+      <div class="field">
+        <label class="block">Address
+          <span class="text-danger"> *</span>
+        </label>
+        <input formControlName="address" type="text" pInputText />
+        <div *ngIf="f['address'].invalid && (f['address'].dirty || f['address'].touched)">
+          <div *ngIf="f['address'].hasError('required')" style="color: rgb(225, 82, 82);">
+            This is a required field.
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <label class="block">Gender
+          <span class="text-danger"> *</span>
+        </label>
+        <p-dropdown  formControlName="gender" [options]="gender" placeholder="Gender" optionValue="code" optionLabel="name"></p-dropdown>
+        <div *ngIf="f['gender'].invalid && (f['gender'].dirty || f['gender'].touched)">
+          <div *ngIf="f['gender'].hasError('required')" style="color: rgb(225, 82, 82);">
+            This is a required field.
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <label class="block">PhoneNumber
+          <span class="text-danger"> *</span>
+        </label>
+        <input formControlName="phoneNumber" type="text" pInputText />
+        <div *ngIf="f['phoneNumber'].invalid && (f['phoneNumber'].dirty || f['phoneNumber'].touched)">
+          <div *ngIf="f['phoneNumber'].hasError('required')" style="color: rgb(225, 82, 82);">
+            This is a required field.
+          </div>
+        </div>
+      </div>
+      <div class="field flex justify-content-center">
+        <button style="width: 25%;" [disabled]="formRegister.invalid" (click)="signup()" pButton pRipple type="button"  label="Register"  icon="pi pi-user-plus" class="mr-2"></button>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

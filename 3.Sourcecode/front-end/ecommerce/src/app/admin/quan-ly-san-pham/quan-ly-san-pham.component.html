@@ -1,0 +1,162 @@
+<div class="device-group-wrapper">
+  <div class="flex align-items-center justify-content-between mb-4">
+    <h3>Quản Lý Sản Phẩm</h3>
+    <div class="flex align-items-center">
+      <button pButton pRipple type="button" (click)="createOrEdit()" label="Add new" icon="pi pi-plus" class="mr-2"></button>
+      <button pButton pRipple type="button" (click)="importExcel()"  label="Import" icon="pi pi-upload" class="p-button-warning  mr-2"
+       ></button>
+      <button pButton pRipple type="button" (click)="exportExcel()" label="Export" icon="pi pi-download" class="p-button-help "></button>
+    </div>
+</div>
+<p-panel header="" [toggleable]="true" [formGroup]="FilterForm">
+  
+  <div class="p-fluid grid">
+      <div class="field col-4">
+          <input placeholder="ProductName" formControlName="productName" type="text" pInputText > 
+      </div>
+      <div class="field col-4">
+        <p-inputNumber placeholder="Quantity ( +=10 )" formControlName="quantity"></p-inputNumber>
+      </div>
+      <div class="field col-4">
+        <p-inputNumber placeholder="Cost ( +-100 USD)" formControlName="cost"></p-inputNumber>
+      </div>
+      <div class="field col-4">
+        <p-dropdown formControlName="categoryId" placeholder="Categoty" [options]="category" [showClear]="true" optionValue="code"  optionLabel="name"></p-dropdown>
+      </div>
+      <div class="field col-4">
+          <p-calendar [showIcon]="true" formControlName="createdDate"  selectionMode="range" placeholder="CreatedDate" [readonlyInput]="true" inputId="range"></p-calendar>
+      </div>
+      <div class="field col-4">
+        <p-calendar [showIcon]="true"  formControlName="updatedDate" selectionMode="range" placeholder="UpdatedDate" [readonlyInput]="true" inputId="range"></p-calendar>
+      </div>
+  </div>
+  
+  <div class="flex justify-content-center ">
+      <button
+        class="pButton"
+        pButton
+        pRipple
+        type="button"
+        icon="pi pi-sync"
+        iconPos="left"
+        class="mr-2 pButton"
+        (click)="reset()"
+      >
+        Reset
+      </button>
+      <button
+        class="pButton"
+        pButton
+        pRipple
+        type="button"
+        icon="pi pi-search"
+        iconPos="left"
+        (click)="search()"
+      >
+        Search
+      </button>
+    </div>
+
+</p-panel>
+<div class="mt-3" >
+  <div class="flex justify-content-end">
+    <button (click)="delete()" [disabled]="!selectedProduct || !selectedProduct.length" label="Delete" pButton type="button" class="p-button-danger mr-2"></button>
+  </div>
+<p-table class="mt-3"
+  #dt
+  [scrollable]="true"
+  scrollHeight="300px"
+  [value] ="products"
+  scrollDirection="both"
+  (onLazyLoad)="reloadTable($event)"
+  [tableStyle]="{ 'min-width': '50rem' }"
+  dataKey="id"
+  [(selection)] ="selectedProduct"
+  [paginator]="true"
+  [totalRecords]="totalRecords"
+  [rows]="10"
+  [showCurrentPageReport]="true"
+  styleClass="p-datatable-gridlines"
+  [rowHover]="true"
+  [lazy]="true" 
+  [loading]="isLoading"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Products"
+  [rowsPerPageOptions]="[5, 10, 15]"
+  sortMode="single"
+  sortField="createdDate"
+  [resizableColumns]="true"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 3rem">
+        <p-tableHeaderCheckbox  ></p-tableHeaderCheckbox>
+      </th>
+      <th style="min-width: 100px" pSortableColumn="productName">
+        ProductName<p-sortIcon field="productName"></p-sortIcon>
+      </th>
+      <th style="min-width: 100px" pSortableColumn="shortDescription">
+        ShortDescription<p-sortIcon field="shortDescription"></p-sortIcon>
+      </th>
+      <th style="min-width: 180px" pSortableColumn="cost">
+        Cost<p-sortIcon field="cost"></p-sortIcon>
+      </th>
+      <th style="min-width: 180px" pSortableColumn="quantity">
+        Quantity<p-sortIcon field="quantity"></p-sortIcon>
+      </th>
+      <th style="min-width: 180px" pSortableColumn="categoryId">
+        CategotyID<p-sortIcon field="categoryId"></p-sortIcon>
+      </th>
+      <th style="min-width: 180px" pSortableColumn="colorId">
+        ColorId<p-sortIcon field="colorId"></p-sortIcon>
+      </th>
+      <th style="min-width: 180px" pSortableColumn="sizeId">
+        SizeId<p-sortIcon field="sizeId"></p-sortIcon>
+      </th>
+      <th style="min-width: 180px" pSortableColumn="discountId">
+        DiscountId<p-sortIcon field="discountId"></p-sortIcon>
+      </th>
+      <th style="min-width: 180px" pSortableColumn="createdDate">
+        CreatedDate<p-sortIcon field="createdDate"></p-sortIcon>
+      </th>
+      <th style="min-width: 180px" pSortableColumn="updatedDate">
+        UpdatedDate<p-sortIcon field="updatedDate"></p-sortIcon>
+      </th>
+     
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-product>
+    <tr>
+      <td><p-tableCheckbox [value]="product"></p-tableCheckbox></td>
+      <td (click)="createOrEdit(product)" class="cursor-pointer underline" style="min-width: 100px">{{ product.productName }}</td>
+      <td style="min-width: 100px">{{ product.shortDescription }}</td>
+      <td style="min-width: 180px">{{ product.cost }}</td>
+      <td style="min-width: 180px">{{ product.quantity }}</td>
+      <td style="min-width: 180px">{{ product.categoryId }}</td>
+      <td style="min-width: 180px">{{ product.colorId }}</td>
+      <td style="min-width: 180px">{{ product.sizeId }}</td>
+      <td style="min-width: 180px">{{ product.discountId }}</td>
+      <td style="min-width: 180px">{{ product.createdDate | date: 'dd/MM/yyyy hh:mm:ss' }}</td>
+      <td style="min-width: 180px">{{ product.updatedDate | date: 'dd/MM/yyyy hh:mm:ss' }}</td>
+   </tr>
+</ng-template>
+<ng-template   pTemplate="emptymessage">
+  <tr  >
+      <td style="text-align: center;"  colspan="11">No data found</td>
+  </tr>
+</ng-template>
+</p-table>
+</div>
+</div>
+<div class="fixed bottom-0 right-0 mr-5">
+<p-messages></p-messages>
+</div>
+
+<!-- <p-confirmDialog
+[style]="{ width: '450px', height: '250px' }"
+acceptLabel="Yes, delete"
+rejectLabel="No, cancel"
+rejectButtonStyleClass="bg-red-600"
+acceptButtonStyleClass="bg-primary"
+></p-confirmDialog> -->
+
+

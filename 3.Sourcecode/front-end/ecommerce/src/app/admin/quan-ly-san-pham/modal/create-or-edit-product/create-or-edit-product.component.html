@@ -1,0 +1,234 @@
+
+<div class="dialog-body-custom" [formGroup]="AddForm" >
+    <div >
+      <div class="flex justify-content-end">
+        <button *ngIf="isDetail" (click)="edit()"  pButton type="button" label="Edit" ></button>
+      </div>
+    </div>
+      <div class="p-fluid grid">
+        <div  class="field col-6">
+          <label class="block">Product Name <span class="text-danger"> *</span></label>
+          <span class="w-full">
+            <input
+              type="text"
+              pInputText
+              formControlName="productName"
+              placeholder=""
+            />
+          </span>
+
+          <div *ngIf="f['productName'].invalid && (f['productName'].dirty || f['productName'].touched)">
+            <div *ngIf="f['productName'].hasError('required')" style="color: rgb(225, 82, 82);">
+              This is a required field.
+            </div>
+          </div>
+
+        </div>
+          <div class="field col-6">
+              <label class="block">Quantity
+                  <span class="text-danger"> *</span>
+              </label>
+              <span class="w-full">
+                <p-inputNumber  formControlName="quantity"></p-inputNumber>
+              </span>
+
+              <div *ngIf="f['quantity'].invalid && (f['quantity'].dirty || f['quantity'].touched)">
+                <div *ngIf="f['quantity'].hasError('required')" style="color: rgb(225, 82, 82);">
+                  This is a required field.
+                </div>
+              </div>
+            </div>
+            <div class="field col-6">
+                <label class="block">Cost ( USD )
+                  <span class="text-danger"> *</span>
+                </label>
+                <p-inputNumber formControlName="cost"  mode="decimal"></p-inputNumber>
+                 
+                <div *ngIf="f['cost'].invalid && (f['cost'].dirty || f['cost'].touched)">
+                  <div *ngIf="f['cost'].hasError('required')" style="color: rgb(225, 82, 82);">
+                    This is a required field.
+                  </div>
+                </div>
+              </div>
+            <div class="field col-6">
+              <label class="block">Category<span class="text-danger"> *</span>
+              </label>
+              <span class="w-full">
+                <p-dropdown placeholder="Choose Category" [options]="category" optionValue="code"  formControlName="categoryId" optionLabel="name"></p-dropdown>
+              </span>
+
+              <div *ngIf="f['categoryId'].invalid && (f['categoryId'].dirty || f['categoryId'].touched)">
+                <div *ngIf="f['categoryId'].hasError('required')" style="color: rgb(225, 82, 82);">
+                  This is a required field.
+                </div>
+              </div>
+            </div>
+
+            <div class="field col-6">
+              <label  class="block">Color<span class="text-danger"> *</span>
+              </label>
+              <p-dropdown placeholder="Choose Color"  [options]="color" optionValue="code" formControlName="color" optionLabel="name"></p-dropdown>
+              <div *ngIf="f['color'].invalid && (f['color'].dirty || f['color'].touched)">
+                <div *ngIf="f['color'].hasError('required')" style="color: rgb(225, 82, 82);">
+                  This is a required field.
+                </div>
+              </div>
+            </div>
+              
+            <div class="field col-6">
+              <label class="block">Size<span class="text-danger"> *</span>
+              </label>
+              <p-dropdown placeholder="Choose Size" optionValue="code"  [options]="size" formControlName="size" optionLabel="name"></p-dropdown>
+              <div *ngIf="f['size'].invalid && (f['size'].dirty || f['size'].touched)">
+                <div *ngIf="f['size'].hasError('required')" style="color: rgb(225, 82, 82);">
+                  This is a required field.
+                </div>
+              </div>
+            </div>
+           
+            <div class="field col-12">
+              <label class="block">Discount ( % )<span class="text-danger"> *</span>
+              </label>
+              <p-dropdown  placeholder="Choose Discount" optionValue="code"  [options]="discount" formControlName="discount" optionLabel="name"></p-dropdown>
+              <div *ngIf="f['discount'].invalid && (f['discount'].dirty || f['discount'].touched)">
+                <div *ngIf="f['discount'].hasError('required')" style="color: rgb(225, 82, 82);">
+                  This is a required field.
+                </div>
+              </div>
+            </div>
+
+
+            <div class="field col-6">
+                <label class="block">Short Description<span class="text-danger"> *</span>
+                </label>
+                <textarea formControlName="shortDescription" [rows]="5" [cols]="30" pInputTextarea [autoResize]="true"></textarea>
+                
+                <div *ngIf="f['shortDescription'].invalid && (f['shortDescription'].dirty || f['shortDescription'].touched)">
+                  <div *ngIf="f['shortDescription'].hasError('required')" style="color: rgb(225, 82, 82);">
+                    This is a required field.
+                  </div>
+                </div>
+            
+              </div>
+            <div class="field col-6">
+                <label class="block">Description<span class="text-danger"> *</span>
+                </label>
+                <textarea formControlName="description" [rows]="5" [cols]="30" pInputTextarea [autoResize]="true"></textarea>
+                <div *ngIf="f['description'].invalid && (f['description'].dirty || f['description'].touched)">
+                  <div *ngIf="f['description'].hasError('required')" style="color: rgb(225, 82, 82);">
+                    This is a required field.
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="isDetail" class="field col-12">
+
+                <p-table class="mt-3"
+                #dt
+                [scrollable]="true"
+                scrollHeight="300px"
+                scrollDirection="both"
+                [tableStyle]="{ 'min-width': '50rem' }"
+                dataKey="id"
+                [paginator]="true"
+                [value] ="reviewsProduct"
+                [rows]="5"
+                (onLazyLoad)="reloadTable($event)"
+                [totalRecords]="totalRecords"
+                [showCurrentPageReport]="true"
+                styleClass="p-datatable-gridlines"
+                [rowHover]="true"
+                [lazy]="true" 
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Reviews of Product"
+                [rowsPerPageOptions]="[5, 10, 15]"
+                sortMode="single"
+                sortField="createdDate"
+                [resizableColumns]="true"
+              >
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th style="min-width: 20px">
+                      STT
+                    </th>
+                    <th style="min-width: 100px" pSortableColumn="customerName">
+                      Customer Name<p-sortIcon field="customerName"></p-sortIcon>
+                    </th>
+                    <th style="min-width: 180px" pSortableColumn="rating">
+                      Rating
+                    </th>
+                    <th style="min-width: 180px" pSortableColumn="comment">
+                      Comment
+                    </th>
+                    <th style="min-width: 180px" pSortableColumn="createdDate">
+                      Create Date
+                    </th>
+                    <th style="min-width: 180px" pSortableColumn="updatedDate">
+                      Updated Date
+                    </th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-i="rowIndex" let-review>
+                  <tr>
+                    <td>{{i+1}}</td>
+                    <td  style="min-width: 100px">{{ review.fullName }}</td>
+                    <td style="min-width: 100px">{{ review.rating }}</td>
+                    <td style="min-width: 180px">{{ review.comment }}</td>
+                    <td style="min-width: 180px">{{ review.createdDate | date: 'dd/MM/yyyy hh:mm:ss' }}</td>
+                    <td style="min-width: 180px">{{ review.updatedDate | date: 'dd/MM/yyyy hh:mm:ss' }}</td>
+                </tr>
+              </ng-template>
+              <ng-template   pTemplate="emptymessage">
+                <tr  >
+                    <td style="text-align: center;"  colspan="11">No data found</td>
+                </tr>
+              </ng-template>
+              </p-table>
+              </div>
+              
+
+  
+            <div class="field col-12">
+                <label class="block">Image Product ( Chú ý ảnh đầu tiên được tải lên sẽ chọn mặc định để hiện thị avt sản phẩm)<span class="text-danger"> *</span>
+                </label>
+                    <p-fileUpload [disabled]="isDetail" name="myfile[]" [customUpload]="true" (uploadHandler)="chooseFile($event)" url="./upload.php" [multiple]="true"
+                    accept=".png, .jpg, .jpeg">
+                       
+                    <ng-template pTemplate="content" let-files>
+                        <div>
+                          <p-progressSpinner class="flex justify-content-center" *ngIf="isLoading"></p-progressSpinner>
+                        </div>
+                        <div *ngIf="urlImgDetail.length != 0" >
+                          <!-- <div *ngFor="let item of urlImgDetail; let i = index"  class="p-fluid grid">
+                            <p-image  class="flex justify-content-center" src="{{item}}" alt="Image" [preview]="true" width="250px"></p-image>
+                              <div class="field col-4">
+                                <p-image  class="flex justify-content-center" src="{{item}}" alt="Image" [preview]="true" width="250px"></p-image>
+                              </div>
+                          </div> -->
+                        <p-galleria class="flex justify-content-center"   [value]="urlImgDetail" [responsiveOptions]="responsiveOptions" [containerStyle]="{'max-width': '640px'}" [numVisible]="5"
+                          [circular]="true" [showItemNavigators]="true" [showThumbnails]="false">
+                          <ng-template pTemplate="item" let-item>
+                              <img [src]="item" style="width: 100%; display: block;" />
+                          </ng-template>
+                          <!-- <ng-template pTemplate="thumbnail" let-item>
+                              <div class="grid grid-nogutter justify-content-center">
+                                  <img [src]="item.thumbnailImageSrc" style="display: block;" />
+                              </div>
+                          </ng-template> -->
+                      </p-galleria>
+
+                       
+                        </div>
+                         
+              
+
+
+                    </ng-template>
+                    
+                    </p-fileUpload>
+            </div>
+      </div>
+</div>
+
+<div class="dialog-footer-custom flex align-items-center justify-content-center">
+    <button   pButton pRipple type="button" label="Cancel" class="p-button-secondary mr-2" (click)="onClose()"></button>
+    <button [disabled]="this.AddForm.invalid || !arrUrlImg.length || arrUrlImg.length==0" pButton pRipple type="button" label="Save" (click)="onSave()"></button>
+  </div>

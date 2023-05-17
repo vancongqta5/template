@@ -1,0 +1,18 @@
+<div class="dialog-body-custom">
+    <div class="p-fluid grid">
+      <div class="col-12">
+        <div class="flex justify-content-between">
+            <span class="p-input-icon-right">
+                <i style="color: rgb(3, 8, 22);" class="pi pi-file-excel"></i>
+                <input (change)="uploadFile($event)" accept=".xlsx, .xls" type="file" pInputText />
+            </span>
+        </div>
+      </div>
+      </div>
+</div>
+  <div class="dialog-footer-custom flex align-items-center justify-content-center">
+    <button pButton pRipple type="button" label="Cancel" class="p-button-secondary mr-2" (click)="onClose()"></button>
+    <button pButton pRipple type="button" label="Save" 
+      (click)="onSave()"></button>
+  </div>
+  

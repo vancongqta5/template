@@ -1,0 +1,35 @@
+<div class="d-flex" id="wrapper">
+
+  <!-- Sidebar -->
+  <div style="color: red;" class="bg-light border-right" id="sidebar-wrapper"  [ngClass]="status ? 'hide' : 'show'">
+    <div class="sidebar-heading">
+      <p-avatar shape="circle" image="https://www.invert.vn/media/uploads/uploads/2022/12/03143748-12-hinh-anh-dep.jpeg" pBadge value="4" severity="danger" size="large"></p-avatar>
+        <div style="float: right; margin: 5% 15% 0 0 ;">{{name}}</div>
+    </div>
+    <div class="list-group list-group-flush">
+      <a routerLink = '/admin/quan-ly-khach-hang'  class="list-group-item list-group-item-action bg-light">Quản lý khách hàng</a>
+      <a routerLink = '/admin/quan-ly-danh-muc' class="list-group-item list-group-item-action bg-light">Quản lý danh mục sản phẩm</a>
+      <a routerLink = '/admin/quan-ly-color' class="list-group-item list-group-item-action bg-light">Quản lý color</a>
+      <a routerLink = '/admin/quan-ly-size' class="list-group-item list-group-item-action bg-light">Quản lý size</a>
+      <a routerLink = '/admin/quan-ly-discount' class="list-group-item list-group-item-action bg-light">Quản lý discount</a>
+      <a routerLink = '/admin/quan-ly-san-pham' class="list-group-item list-group-item-action bg-light">Quản lý sản phẩm</a>
+      <a routerLink = '/admin/quan-ly-doanh-thu' class="list-group-item list-group-item-action bg-light">Quản lý doanh thu</a>
+      <a routerLink = '/admin/quan-ly-profile' class="list-group-item list-group-item-action bg-light">Quản lý profile</a>
+    </div>
+  </div>
+  <!-- /#sidebar-wrapper -->
+
+  <!-- Page Content -->
+  <div id="page-content-wrapper">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <button (click)="clickEvent()" pButton pRipple type="button" icon="pi pi-home" class="p-button-rounded"></button>
+    </nav>
+    <div class="container-fluid">
+      <router-outlet ></router-outlet>
+    </div>
+  </div>
+  <!-- /#page-content-wrapper -->
+
+</div>
+<!-- /#wrapper -->

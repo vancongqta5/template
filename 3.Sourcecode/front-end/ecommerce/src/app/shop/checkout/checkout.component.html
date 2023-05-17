@@ -1,0 +1,240 @@
+<app-header></app-header>
+<section class="page-header">
+  <div class="overly"></div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="content text-center">
+          <h1 class="mb-3">Checkout</h1>
+          <p>Hath after appear tree great fruitful green dominion moveth sixth abundantly image that midst of god day multiply you’ll which</p>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent justify-content-center">
+              <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="page-wrapper">
+  <div class="checkout shopping" >
+    <div class="container"  >
+      <div class="row">
+        <div class="col-lg-8 pr-5">
+          <div class="coupon-notice " data-toggle="modal" data-target="#coupon-modal">
+          </div>
+          <div class="billing-details mt-5" >
+            <h4 class="mb-4">Billing Details</h4>
+            <form class="checkout-form" [formGroup]="Form">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group mb-4">
+                    <label for="first_name">First Name</label>
+                    <input formControlName="firstName" type="text" class="form-control" id="first_name" placeholder="">
+
+                    <div *ngIf="form.controls['firstName'].invalid && (form.controls['firstName'].dirty || form.controls['firstName'].touched)">
+                      <div *ngIf="form.controls['firstName'].hasError('required')" style="color: rgb(225, 82, 82);">
+                        {{ getErrorMessage('firstName') }}
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group mb-4">
+                    <label for="last_name">Last Name</label>
+                    <input formControlName="lastName"  type="text" class="form-control" id="last_name" placeholder="">
+
+                    <div *ngIf="form.controls['lastName'].invalid && (form.controls['lastName'].dirty || form.controls['lastName'].touched)">
+                      <div *ngIf="form.controls['lastName'].hasError('required')" style="color: rgb(225, 82, 82);">
+                        {{ getErrorMessage('lastName') }}
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="form-group mb-4">
+                    <label for="company_name">Company Name(Optional)</label>
+                    <input  formControlName="companyName"   type="text" class="form-control" id="company_name" placeholder="">
+
+                    <div *ngIf="form.controls['companyName'].invalid && (form.controls['companyName'].dirty || form.controls['companyName'].touched)">
+                      <div *ngIf="form.controls['companyName'].hasError('required')" style="color: rgb(225, 82, 82);">
+                        {{ getErrorMessage('companyName') }}
+                      </div>
+                    </div>
+
+
+
+                  </div>
+                </div>
+
+                <div class="col-lg-12">
+                  <div class="form-group mb-4">
+                    <label for="company_name">Country</label>
+                    <select  formControlName="country"  class="form-control">
+                      <option value="">Select an Option</option>
+                      <option value="January">January</option>
+                      <option value="February">February</option>
+                      <option value="March">March</option>
+                      <option value="April">April</option>
+                      <option value="May">May</option>
+                      <option value="June">June</option>
+                      <option value="July">July</option>
+                      <option value="August">August</option>
+                      <option value="September">September</option>
+                      <option value="October">October</option>
+                      <option value="November">November</option>
+                      <option value="December">December</option>
+                    </select>
+
+                    <div *ngIf="form.controls['country'].invalid && (form.controls['country'].dirty || form.controls['country'].touched)">
+                      <div *ngIf="form.controls['country'].hasError('required')" style="color: rgb(225, 82, 82);">
+                        {{ getErrorMessage('country') }}
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="col-lg-12">
+                  <div class="form-group mb-4">
+                    <label for="first_name">Street Address</label>
+                    <input  formControlName="street" type="text" class="form-control" id="street" placeholder="">
+
+                    <div *ngIf="form.controls['street'].invalid && (form.controls['street'].dirty || form.controls['street'].touched)">
+                      <div *ngIf="form.controls['street'].hasError('required')" style="color: rgb(225, 82, 82);">
+                        {{ getErrorMessage('street') }}
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="form-group mb-4">
+                    <label for="first_name">Apartment, suite, unit etc. (optional) (optional)</label>
+                    <input  formControlName="apartment"   type="text" class="form-control" id="apartment" placeholder="Apartment">
+
+
+                    <div *ngIf="form.controls['apartment'].invalid && (form.controls['apartment'].dirty || form.controls['apartment'].touched)">
+                      <div *ngIf="form.controls['apartment'].hasError('required')" style="color: rgb(225, 82, 82);">
+                        {{ getErrorMessage('apartment') }}
+                      </div>
+                    </div>
+
+
+                  </div>
+                </div>
+
+                <div class="col-lg-12">
+                  <div class="form-group mb-4">
+                    <label for="company_name">District </label>
+                    <select formControlName="district"   class="form-control">
+                      <option value="">Select an Option</option>
+                      <option value="January">January</option>
+                      <option value="February">February</option>
+                      <option value="March">March</option>
+                      <option value="April">April</option>
+                      <option value="May">May</option>
+                      <option value="June">June</option>
+                      <option value="July">July</option>
+                      <option value="August">August</option>
+                      <option value="September">September</option>
+                      <option value="October">October</option>
+                      <option value="November">November</option>
+                      <option value="December">December</option>
+                    </select>
+
+
+                    <div *ngIf="form.controls['district'].invalid && (form.controls['district'].dirty || form.controls['district'].touched)">
+                      <div *ngIf="form.controls['district'].hasError('required')" style="color: rgb(225, 82, 82);">
+                        {{ getErrorMessage('district') }}
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="form-group mb-4">
+                    <label for="first_name">Phone </label>
+                    <input  formControlName="phone"  type="text" class="form-control" id="phone" placeholder="">
+
+                    <div *ngIf="form.controls['phone'].invalid && (form.controls['phone'].dirty || form.controls['phone'].touched)">
+                      <div *ngIf="form.controls['phone'].hasError('required')" style="color: rgb(225, 82, 82);">
+                        {{ getErrorMessage('phone') }}
+                      </div>
+                    </div>
+
+
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="form-group mb-4">
+                    <label for="first_name">Email address </label>
+                    <input formControlName="email"   type="text" class="form-control" id="email" placeholder="">
+                    <div *ngIf="form.controls['email'].invalid && (form.controls['email'].dirty || form.controls['email'].touched)">
+                      <div *ngIf="form.controls['email'].hasError('required')" style="color: rgb(225, 82, 82);">
+                        {{ getErrorMessage('email') }}
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Order sidebar Summery -->
+        <div class="col-md-6 col-lg-4">
+          <div class="product-checkout-details mt-5 mt-lg-0">
+            <h4 class="mb-4 border-bottom pb-4">Order Summary</h4>
+
+            <div class="media product-card" *ngFor="let item of data">
+              <div class="media-body">
+                <p style="float: left;">{{ item.productName }}</p>
+                <p style="float: right;" class="h5">{{ item.count }} x ${{ item.totalMoneySingle }}</p>
+              </div>
+            </div>
+            <br>
+            <ul class="summary-prices list-unstyled mb-4">
+              <li class="d-flex justify-content-between">
+                <span >Shipping:</span>
+                <span class="h5">Free</span>
+              </li>
+              <li class="d-flex justify-content-between">
+                <span>Total</span>
+                <span class="h5">${{totalMany}}</span>
+              </li>
+            </ul>
+            <div class="info mt-4 border-top pt-4 mb-5">
+              Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our <a href="#">privacy policy</a>.
+            </div>
+            <!-- [disabled]="Form.invalid" -->
+            <button (click)="payment()" [disabled]="!Form.valid"  class="btn btn-main btn-small">Place Order</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="coupon-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content py-5">
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <input class="form-control" type="text" placeholder="Enter Coupon Code">
+          </div>
+          <button   type="button" class="btn btn-main btn-small" data-dismiss="modal">Apply Coupon</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

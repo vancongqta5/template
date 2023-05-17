@@ -1,0 +1,52 @@
+
+<app-header></app-header>
+
+
+<div class="card mt-2 mb-2" style="width: 80%; margin: auto;" [formGroup]="formLogin">
+  <div class="p-fluid grid">
+    <div class="field col-12 ">
+        <h1 class="flex justify-content-center">Login</h1>
+    </div>
+    <div class="field col-7" style="margin: auto;">
+      <button [disabled]="true" *ngIf="showMessage" style="opacity: 0.9;"  pButton pRipple type="button"  class="p-button-danger" 
+       label="{{dangerMessage}}"></button>
+  </div>
+    <div class="field col-7" style="margin: auto;">
+        <label class="block">Username
+          <span  class="text-danger"> *</span>
+        </label>
+        <input formControlName="username" class="flex justify-content-center"  type="text" pInputText />
+        <div *ngIf="f['username'].invalid && (f['username'].dirty || f['username'].touched)">
+          <div *ngIf="f['username'].hasError('required')" style="color: rgb(225, 82, 82);">
+            This is a required field.
+          </div>
+        </div>
+    </div>
+
+    <div class="field col-7" style="margin: auto;">
+      <label class="block">Password
+        <span  class="text-danger"> *</span>
+      </label>
+      <input formControlName="password" class="flex justify-content-center"  type="password" pInputText />
+
+      <div *ngIf="f['password'].invalid && (f['password'].dirty || f['password'].touched)">
+        <div *ngIf="f['password'].hasError('required')" style="color: rgb(225, 82, 82);">
+          This is a required field.
+        </div>
+        <div *ngIf="f['password'].hasError('minlength')" style="color: rgb(225, 82, 82);">
+          Password must be longer than 6 characters.
+        </div>
+      </div>
+   </div>
+
+   <div class="field col-7" style="margin: auto;">
+     <p class="flex justify-content-center">Bạn chưa có tài khoản?<a style="text-decoration:underline;" routerLink = '/auth/sign-up'> Đăng kí ngay</a></p>
+   </div>
+   <div class="field col-7" style="margin: auto;">
+    <button (click)="login()" [disabled]="formLogin.invalid"  style="width: 25%; margin: auto;" pButton pRipple type="button"  icon="pi pi-sign-in" label="Login"  class="p-button-success flex justify-content-center"></button>
+   </div>
+  </div>
+</div>
+  
+
+<app-footer></app-footer>
